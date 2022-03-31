@@ -1,0 +1,21 @@
+<div>
+    <div style="margin:10px">
+        <mat-card>
+            <h2>Detail Ticket</h2>
+          <li> Id : {{ticket.id}} </li>
+          <li> IsCompleted:  <mat-slide-toggle ([ngModel])="ticket.completed" (change)="updateCompleteTicket()" > </mat-slide-toggle> </li> 
+          <li> Assigne To  <span>  
+              <mat-form-field appearance="fill">
+            <mat-label>Assign</mat-label>
+            <mat-select [(ngModel)]="ticket.assigneeId" name="assign" (selectionChange)="assignUser($event.value)">
+              <mat-option *ngFor="let user of users" [value]="user.id">
+                {{user.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> </span> </li>
+          <li> Description:{{ticket.description}}</li>
+         
+        </mat-card>
+    </div>
+   
+</div>

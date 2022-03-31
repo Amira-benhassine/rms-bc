@@ -1,0 +1,84 @@
+<h2> Tickets</h2>
+<button mat-raised-button [disabled]="isAdding" (click)="addRow()" style="margin: 3%;">Add Tickets</button>
+
+
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef > Id </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="completed">
+      <mat-header-cell *matHeaderCellDef > Completed </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.completed}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="assigneeId">
+        <mat-header-cell *matHeaderCellDef > AssigneeId </mat-header-cell>
+        <mat-cell *matCellDef="let row">   {{row.assigneeId}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef > Description </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+      </ng-container>
+      
+    <!-- Name Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef > Action </mat-header-cell>
+      <mat-cell *matCellDef="let row"> </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+  
+    <ng-container matColumnDef="Addid">
+        <mat-header-cell *matHeaderCellDef > {{ticket?.id}}   </mat-header-cell>
+        <mat-cell></mat-cell>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="Addcompleted">
+        <mat-header-cell *matHeaderCellDef > 
+            <mat-slide-toggle [disabled]="true" > </mat-slide-toggle>
+                </mat-header-cell>
+      </ng-container>
+      <ng-container matColumnDef="AddassigneeId">
+        <mat-header-cell *matHeaderCellDef > 
+                 -
+                </mat-header-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="Adddescription">
+        <mat-header-cell *matHeaderCellDef > 
+         <mat-form-field appearance="outline">
+            <input matInput (change)="GetDescription($event.target.value)" width="50%"
+                    maxlength="100" [required]>
+        </mat-form-field> 
+                </mat-header-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="Addaction">
+        <mat-header-cell *matHeaderCellDef > 
+        <button mat-icon-button matTooltip="Save" (click)="onAddClick()" >
+            <mat-icon>done</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Cancel" (click)="onCancelAddClick()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-header-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+  
+    <mat-header-row [ngClass]="getAddHeaderRowClass()" *matHeaderRowDef="['Addid','Addcompleted','AddassigneeId','Adddescription', 'Addaction']; sticky: true">
+    </mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="'link'" (click)="showInfo(row)"></mat-row>
+  </mat-table>
+</div>
+
